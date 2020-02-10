@@ -1,0 +1,36 @@
+
+$header-color: #6f00ff;
+header {
+    background: $header-color;
+    padding: 1em 0;
+
+    a {
+        color: white;
+        text-decoration: none;  
+        &:hover {
+            text-decoration: none;                   
+        }    
+    }
+    a.logo {
+        font-weight: bold;     
+        font-size: 1.2em; 
+    }
+    nav {
+        float: right;        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+            li a {
+                padding: 1.4em;
+                font-size: 1em;
+                text-decoration: none;
+                &:hover {
+                    background: darken($header-color, 10%); 
+                    text-decoration: none;  
+                    color: lighten(#000, 80%);                 
+                }
+            }
+        }
+    }
+}

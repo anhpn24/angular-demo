@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, Http
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
+import { environment } from '../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class AppInterceptorService implements HttpInterceptor {
   constructor(public authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const apiEndPoint = environment.apiUrl;
     const reqHeaders = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getToken()}`
     });
 
     const clone = req.clone({
+      url : apiEndPoint + req.url,
       headers: reqHeaders,
       params: null
     });

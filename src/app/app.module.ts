@@ -9,18 +9,24 @@ import { PostComponent } from './components/post/post.component';
 import { AppInterceptorService } from './app.interceptor';
 import { PhotoComponent } from './components/photo/photo.component';
 import { BreweryComponent } from './components/brewery/brewery.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HighLightDirective } from './directives/high-light.directive';
+import { CurrencyUnitPipe } from './pipes/currency-unit.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
     PhotoComponent,
-    BreweryComponent
+    BreweryComponent,
+    HighLightDirective,
+    CurrencyUnitPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

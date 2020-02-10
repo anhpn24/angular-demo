@@ -10,6 +10,6 @@ export class PhotoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/photos');
+    return this.http.get('/photos');
   }
 }

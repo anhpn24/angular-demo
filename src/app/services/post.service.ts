@@ -10,6 +10,6 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get('/posts');
   }
 }
