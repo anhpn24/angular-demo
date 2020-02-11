@@ -25,6 +25,9 @@ header {
                 padding: 1.4em;
                 font-size: 1em;
                 text-decoration: none;
+                &.active {
+                    color: red;
+                }
                 &:hover {
                     background: darken($header-color, 10%); 
                     text-decoration: none;  

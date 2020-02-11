@@ -12,10 +12,7 @@ export class PhotoComponent implements OnInit {
 
   posts: any;
   ngOnInit() {
-    this.photoService.getAll().subscribe(data => (
-      this.posts = data,
-      console.log(data))
-    );
+    this.photoService.getAll().subscribe(data => (this.posts = data));
   }
 
 }

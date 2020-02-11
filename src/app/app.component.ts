@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-demo';
+  constructor(private router: Router ) {
+    this.router.events.subscribe(
+      (event: any) => {
+        if (event instanceof NavigationEnd) {
+          console.log('this.router.url', this.router.url);
+        }
+      }
+    );
+  }
 }

@@ -12,10 +12,7 @@ export class PostComponent implements OnInit {
 
   posts: any;
   ngOnInit() {
-    this.postService.getAll().subscribe(data => (
-      this.posts = data,
-      console.log(data))
-    );
+    this.postService.getAll().subscribe(data => (this.posts = data));
   }
 
 }
