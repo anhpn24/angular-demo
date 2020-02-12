@@ -1,5 +1,6 @@
-<ul>
-    <li *ngFor="let post of posts; let i = index">
-        <b>({{ i }})</b> {{ post.url }}
+<ul *ngIf="photos">
+    <li *ngFor="let photo of photos">
+        <img [src]="photo.url">
+        <p>{{ photo.title | titlecase }}</p>
     </li>
 </ul>

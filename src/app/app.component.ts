@@ -7,7 +7,6 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-demo';
   constructor(private router: Router ) {
     this.router.events.subscribe(
       (event: any) => {

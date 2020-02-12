@@ -5,6 +5,7 @@ import { PostComponent } from './components/post/post.component';
 import { PhotoComponent } from './components/photo/photo.component';
 import { BreweryComponent } from './components/brewery/brewery.component';
 import { HomeComponent } from './components/home/home.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'posts', component: PostComponent},
   {path: 'photos', component: PhotoComponent},
   {path: 'breweries', component: BreweryComponent},
+  {path: 'contacts', component: ContactComponent}
 ];
 
 @NgModule({
@@ -19,4 +21,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [PostComponent, PhotoComponent, BreweryComponent, HomeComponent];
+export const routingComponents = [PostComponent, PhotoComponent, 
+  BreweryComponent, HomeComponent, ContactComponent];

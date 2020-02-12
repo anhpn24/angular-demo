@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, take } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment'
 
@@ -19,13 +19,14 @@ export class AppInterceptorService implements HttpInterceptor {
     });
 
     const clone = req.clone({
-      url : apiEndPoint + req.url,
+      url : req.url.startsWith('/') ? apiEndPoint + req.url : req.url,
       headers: reqHeaders,
       params: null
     });
 
     return next.handle(clone).pipe(
       catchError(this.handleError),
+      take(10),
       retry(1)
     );
   }

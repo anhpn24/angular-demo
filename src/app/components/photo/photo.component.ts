@@ -10,9 +10,9 @@ export class PhotoComponent implements OnInit {
 
   constructor(private photoService: PhotoService) { }
 
-  posts: any;
+  photos: Object;
   ngOnInit() {
-    this.photoService.getAll().subscribe(data => (this.posts = data));
+    this.photoService.getAll().subscribe(data => (this.photos = data.slice(0, 10)));
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BreweryService } from 'src/app/services/brewery.service';
+
 @Component({
   selector: 'app-brewery',
   templateUrl: './brewery.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreweryComponent implements OnInit {
 
-  constructor() { }
+  brews: Object;
+
+  constructor(private breweryService: BreweryService) { }
 
   ngOnInit() {
+    this.breweryService.getAll().subscribe(data => (this.brews = data));
   }
 
 }

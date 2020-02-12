@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   clickCounter: number = 0;
+  color: string = '';
+  currencyUnit = '';
+  price = 3000;
 
   constructor() { }
 
@@ -18,4 +21,11 @@ export class HomeComponent implements OnInit {
     this.clickCounter += 1;
   }
 
+  setClasses() {
+    let myClasses = {
+      'active' : this.clickCounter > 4,
+      'no-active' : this.clickCounter <= 4
+    }
+    return myClasses;
+  }
 }
