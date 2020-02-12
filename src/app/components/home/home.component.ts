@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+// NgRx
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Tutorial } from '../../models/tutorial.model';
+import { AppState } from '../../app.state';
+import * as TutorialActions from '../../actions/tutorial.action';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,8 +18,21 @@ export class HomeComponent implements OnInit {
   color: string = '';
   currencyUnit = '';
   price = 3000;
+  closeResult: string = '';
 
-  constructor() { }
+  // NgRx
+  tutorials: Observable<Tutorial[]>;
+  constructor(private store: Store<AppState>) {
+    this.tutorials = store.select('tutorial');
+  }
+
+  addTutorial(name, url) {
+    this.store.dispatch(new TutorialActions.AddTutorial({name: name, url: url}) )
+  }
+
+  delTutorial(index) {
+    this.store.dispatch(new TutorialActions.RemoveTutorial(index) )
+  }
 
   ngOnInit() {
   }
@@ -27,5 +47,6 @@ export class HomeComponent implements OnInit {
       'no-active' : this.clickCounter <= 4
     }
     return myClasses;
-  }
+  }  
+  
 }

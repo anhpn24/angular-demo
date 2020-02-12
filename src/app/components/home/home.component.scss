@@ -28,3 +28,22 @@ span {
  .no-active {
      background-color: lightgray;
  }
+
+    // NgRx
+.row {
+    input[type="text"] {
+        width: 100%;
+        padding: 1em;
+        margin-bottom: 2em;
+    }
+    
+    .del {
+        color: red;
+        padding-left: 20px;    
+        &:hover {
+            color: red;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

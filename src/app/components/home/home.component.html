@@ -46,3 +46,25 @@
     </div>
     <p>{{ price | currencyUnit: currencyUnit : 2 }}</p>
 </div>
+
+<div class="play-container">
+    <h3 class="mb-4">NgRx - State Management</h3>
+
+    <div class="row">
+        <div class="col-6 pr-5" *ngIf="tutorials">
+            <input type="text" placeholder="name" #name>
+            <input type="text" placeholder="message" #url>
+
+            <button (click)="addTutorial(name.value,url.value)">Add a Tutorial</button>
+        </div>
+        <div class="col-6 pl-5">
+            <h3>Tutorials</h3>
+            <ul>
+                <li *ngFor="let tutorial of tutorials | async; let i = index">
+                    <a [href]="tutorial.url" target="_blank">{{ tutorial.name }}</a>
+                    <a class="del" (click)="delTutorial(i)">Delete</a>                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -12,4 +12,8 @@ export class BreweryService {
   getAll(): Observable<any> {
     return this.http.get('https://api.openbrewerydb.org/breweries');
   }
+
+  getById(id: any): Observable<any> {
+    return this.http.get('https://api.openbrewerydb.org/breweries/' + id.toString());
+  }
 }

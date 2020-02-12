@@ -7,7 +7,7 @@
             <div *ngIf="messageForm.controls.name.errors.required">Your name is required</div>
         </div>
     </label>
-    
+
     <label>
         Message: <textarea type="text" formControlName="message"></textarea>
         <div *ngIf="submitted && messageForm.controls.message.errors" class="error">
