@@ -1,0 +1,9 @@
+{
+    "APP": {
+        "BRAND": "Angular {{version}}",
+        "HOME": "Home",
+        "PHOTOS" : "Photos",
+        "BREWERIES" : "Breweries",
+        "CONTACT" : "Contact"
+    }
+}

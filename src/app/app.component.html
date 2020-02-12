@@ -1,17 +1,17 @@
 <header>
     <div class="container">
-        <a href="#" routerLink="/" class="logo">Angular</a>
+        <a href="#" routerLink="/" class="logo">{{ 'APP.BRAND' | translate:{'version':'8'} }}</a>
         <nav>
             <ul>
-                <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-                <li><a routerLink="/photos" routerLinkActive="active">Photos</a></li>
-                <li><a routerLink="/breweries" routerLinkActive="active">Breweries</a></li>
-                <li><a routerLink="/contacts" routerLinkActive="active">Contact</a></li>
+                <li><a routerLink="/home" routerLinkActive="active">{{ 'APP.HOME' | translate }}</a></li>
+                <li><a routerLink="/photos" routerLinkActive="active">{{ 'APP.PHOTOS' | translate }}</a></li>
+                <li><a routerLink="/breweries" routerLinkActive="active">{{ 'APP.BREWERIES' | translate }}</a></li>
+                <li><a routerLink="/contacts" routerLinkActive="active">{{ 'APP.CONTACT' | translate }}</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<div class="container">
+<div class="container mt-3">
     <router-outlet></router-outlet>
 </div>

@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, Http
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, take } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class AppInterceptorService implements HttpInterceptor {
     });
 
     const clone = req.clone({
-      url : req.url.startsWith('/') ? apiEndPoint + req.url : req.url,
+      url : req.url.startsWith('/') && !req.url.startsWith('/assets') ? apiEndPoint + req.url : req.url,
       headers: reqHeaders,
       params: null
     });
@@ -33,8 +33,6 @@ export class AppInterceptorService implements HttpInterceptor {
 
   handleError(error: HttpErrorResponse) {
     if (error.status === 403) {
-      console.log('403');
-
       // TODO: return Refresh Token here and hold other calls
     }
     return throwError(error);

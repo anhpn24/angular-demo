@@ -1,0 +1,9 @@
+{
+    "APP": {
+        "BRAND": "Angular {{version}}",
+        "HOME": "Trang chủ",
+        "PHOTOS" : "Bộ sưu tập ảnh",
+        "BREWERIES" : "Nhà máy bia",
+        "CONTACT" : "Liên hệ"
+    }
+}
