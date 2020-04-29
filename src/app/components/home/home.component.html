@@ -4,11 +4,41 @@
     <div>
         <p>You've clicked <span (click)="countClick()">this</span> {{ clickCounter }} times</p>
     </div>
+
+    <form [formGroup]="heroForm" novalidate (submit)="onSubmit()">
+        <div class="form-group">
+            <ng-select class="w-50" [items]="ages" [selectOnTab]="true" [searchable]="false" bindValue="id" [clearable]="false"
+                bindLabel="name" placeholder="Select age" formControlName="age1">
+            </ng-select>
+        </div>
+        <div class="form-group">
+            <ng-select class="w-50" [items]="ages" [selectOnTab]="true" bindValue="id" bindLabel="name"
+                [closeOnSelect]="false" (ngModelChange)="checkAll()" [multiple]="true" formControlName="age">
+                <ng-template ng-header-tmp>
+                    <input type="checkbox" id="checkAll" [checked]="isChecked" (change)="onChange($event)"> <label for="checkAll">Tất cả</label> 
+                </ng-template>
+                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                    <div class="ng-value" *ngFor="let item of items | slice:0:3">
+                        <span class="ng-value-label">{{item.name}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </div>
+                    <div class="ng-value" *ngIf="items.length > 3">
+                        <span class="ng-value-label">+ {{items.length - 3}}</span>
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"
+                        [ngModelOptions]="{standalone: true}" /> {{item.name}}
+                </ng-template>
+            </ng-select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
 <div class="play-container">
     <p>
-        <input type="text" [(ngModel)]="name">
+        <input type="text" class="text-input" [(ngModel)]="name">
         <br>
         <strong>Value: </strong> {{ name }}
     </p>
@@ -62,7 +92,7 @@
             <ul>
                 <li *ngFor="let tutorial of tutorials | async; let i = index">
                     <a [href]="tutorial.url" target="_blank">{{ tutorial.name }}</a>
-                    <a class="del" (click)="delTutorial(i)">Delete</a>                    
+                    <a class="del" (click)="delTutorial(i)">Delete</a>
                 </li>
             </ul>
         </div>

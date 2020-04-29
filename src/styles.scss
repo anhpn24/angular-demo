@@ -3,5 +3,7 @@
 // $body-bg: #000;
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

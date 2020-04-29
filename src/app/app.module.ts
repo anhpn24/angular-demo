@@ -19,12 +19,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './reducers/tutorial.reducer';
 
+// ng-select
+import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     HighLightDirective,
-    CurrencyUnitPipe    
+    CurrencyUnitPipe 
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { reducer } from './reducers/tutorial.reducer';
     }),
     StoreModule.forRoot({ // NgRx
       tutorial: reducer
-    })
+    }),
+    NgSelectModule // ng-select
   ],
   providers: [
     {
