@@ -5,17 +5,18 @@
         <p>You've clicked <span (click)="countClick()">this</span> {{ clickCounter }} times</p>
     </div>
 
-    <form [formGroup]="heroForm" novalidate (submit)="onSubmit()">
+    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <ng-select class="w-50" [items]="ages" [selectOnTab]="true" [searchable]="false" bindValue="id" [clearable]="false"
-                bindLabel="name" placeholder="Select age" formControlName="age1">
+            <ng-select class="w-50" [items]="ages" [selectOnTab]="true" [searchable]="false" bindValue="id"
+                [clearable]="false" bindLabel="name" placeholder="Select age" formControlName="age1">
             </ng-select>
         </div>
         <div class="form-group">
             <ng-select class="w-50" [items]="ages" [selectOnTab]="true" bindValue="id" bindLabel="name"
                 [closeOnSelect]="false" (ngModelChange)="checkAll()" [multiple]="true" formControlName="age">
                 <ng-template ng-header-tmp>
-                    <input type="checkbox" id="checkAll" [checked]="isChecked" (change)="onChange($event)"> <label for="checkAll">Tất cả</label> 
+                    <input type="checkbox" id="checkAll" [checked]="isChecked" (change)="onChange($event)"> <label
+                        for="checkAll">Tất cả</label>
                 </ng-template>
                 <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
                     <div class="ng-value" *ngFor="let item of items | slice:0:3">
@@ -32,7 +33,61 @@
                 </ng-template>
             </ng-select>
         </div>
-        <button type="submit">Submit</button>
+        <div class="form-group">
+            <input type="text" class="form-control w-50" formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control w-50" formControlName="name2"
+                [ngClass]="{ 'is-invalid': (submitted && f.name2.errors) || (f.name2.touched && f.name2.errors) }">
+            <div *ngIf="(submitted && f.name2.errors) || (f.name2.touched && f.name2.errors)" class="invalid-feedback">
+                <div *ngIf="f.name2.errors.required">Name 2 is required</div>
+                <div *ngIf="f.name2.errors.mustMatch">Name 2 is must match than Name</div>
+            </div>
+        </div>
+        <div formGroupName="group">
+            <div class="form-group">
+                <input type="text" class="form-control w-50" formControlName="item1"
+                    [ngClass]="{ 'is-invalid': submitted && f.group.controls.item1.errors }">
+                <div *ngIf="submitted && f.group.controls.item1.errors" class="invalid-feedback">
+                    <div *ngIf="f.group.controls.item1.errors.required">Item 1 is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control w-50" formControlName="item2"
+                    [ngClass]="{ 'is-invalid': submitted && fg.item2.errors }">
+                <div *ngIf="submitted && fg.item2.errors" class="invalid-feedback">
+                    <div *ngIf="fg.item2.errors.required">Item 1 is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control w-50" formControlName="fromDate"
+                [ngClass]="{ 'is-invalid': (submitted && f.fromDate.errors) || (f.fromDate.touched && f.fromDate.errors) }">
+            <div *ngIf="(submitted && f.fromDate.errors) || (f.fromDate.touched && f.fromDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.fromDate.errors.required">From Date is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="date" class="form-control w-50" formControlName="toDate"
+                [ngClass]="{ 'is-invalid': (submitted && f.toDate.errors) || (f.toDate.touched && f.toDate.errors) }">
+            <div *ngIf="(submitted && f.toDate.errors) || (f.toDate.touched && f.toDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.toDate.errors.required">To Date is required</div>
+                <div *ngIf="f.toDate.errors.compareDate">To Date is must great than From Date</div>
+            </div>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+        <pre>{{ heroForm.value | json }}</pre>
+
+        <span>Name</span><pre>{{ f.name.errors | json }}</pre>
+        <span>Name2</span><pre>{{ f.name2.errors | json }}</pre>
+        <span>Group.Item1</span><pre>{{ fg.item1.errors | json }}</pre>
+        <span>Group.Item2</span><pre>{{ fg.item2.errors | json }}</pre>
+        <span>FromDate</span><pre>{{ f.fromDate.errors | json }}</pre>
+        <span>ToDate</span><pre>{{ f.toDate.errors | json }}</pre>
     </form>
 </div>
 

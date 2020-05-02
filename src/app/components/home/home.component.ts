@@ -6,7 +6,9 @@ import { Store } from '@ngrx/store';
 import { Tutorial } from '../../models/tutorial.model';
 import { AppState } from '../../app.state';
 import * as TutorialActions from '../../actions/tutorial.action';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MustMatch } from 'src/app/validators/must-match.validator';
+import { CompareDate } from 'src/app/validators/compare-date.validator';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit {
   price = 3000;
   closeResult: string = '';
   isChecked: boolean;
+  submitted = false;
 
   heroForm: FormGroup;
   ages: any[] = [
@@ -56,10 +59,23 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.heroForm = this.fb.group({
-      age: [],
+      age: '',
       age1: '',
+      name: ['', Validators.required],
+      name2: ['', Validators.required],
+      group: this.fb.group({
+        item1: ['', Validators.required],
+        item2: ['', Validators.required]
+      }),
+      fromDate: ['', Validators.required],
+      toDate: ['', Validators.required],
+    }, {
+      validator: [MustMatch('name', 'name2'), CompareDate('fromDate', 'toDate')]
     });
   }
+
+  get f() { return this.heroForm.controls; }
+  get fg() { return this.heroForm.controls.group['controls']; }
 
   countClick() {
     this.clickCounter += 1;
@@ -74,6 +90,14 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.heroForm.invalid) {
+      return;
+    }
+
+    console.log(this.fg);
     console.log(this.heroForm.getRawValue());
   }
 
