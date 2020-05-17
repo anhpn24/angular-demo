@@ -36,7 +36,6 @@
                 </ng-template>
             </ng-select>
         </div>
-
         <div class="form-group">
             <ng-select class="w-50" [items]="productData" [selectOnTab]="true" bindValue="id" bindLabel="name"
                 [closeOnSelect]="false" [multiple]="true" formControlName="serviceCodes" (clear)="onClearProduct()">
@@ -60,7 +59,6 @@
                 </ng-template>
             </ng-select>
         </div>
-
         <div class="form-group">
             <ng-select class="w-50" [items]="timeCodeData" [selectOnTab]="true" [searchable]="false" bindValue="id"
                 [clearable]="false" bindLabel="name" formControlName="timeCode"
@@ -77,7 +75,6 @@
                 <div *ngIf="f.name.errors.required">Name is required</div>
             </div>
         </div>
-
         <div class="form-group">
             <input type="text" class="form-control w-50" formControlName="name2"
                 [ngClass]="{ 'is-invalid': (submitted && f.name2.errors) || (f.name2.touched && f.name2.errors) }">
@@ -102,23 +99,35 @@
                 </div>
             </div>
         </div>
+
+        <br>
+
         <div class="form-group">
             <input type="date" class="form-control w-50" formControlName="fromDate"
-                [ngClass]="{ 'is-invalid': (submitted && f.fromDate.errors) || (f.fromDate.touched && f.fromDate.errors) }">
-            <div *ngIf="(submitted && f.fromDate.errors) || (f.fromDate.touched && f.fromDate.errors)"
+                [ngClass]="{ 'is-invalid': (submitted || f.fromDate.touched) && f.fromDate.errors }">
+            <div *ngIf="(submitted || f.fromDate.touched) && f.fromDate.errors"
                 class="invalid-feedback">
                 <div *ngIf="f.fromDate.errors.required">From Date is required</div>
+                <div *ngIf="f.fromDate.errors.compareDate">From Date is must less than To Date</div>
             </div>
         </div>
         <div class="form-group">
             <input type="date" class="form-control w-50" formControlName="toDate"
-                [ngClass]="{ 'is-invalid': (submitted && f.toDate.errors) || (f.toDate.touched && f.toDate.errors) }">
-            <div *ngIf="(submitted && f.toDate.errors) || (f.toDate.touched && f.toDate.errors)"
+                [ngClass]="{ 'is-invalid':(submitted || f.toDate.touched) && f.toDate.errors}">
+            <div *ngIf="(submitted || f.toDate.touched) && f.toDate.errors"
                 class="invalid-feedback">
                 <div *ngIf="f.toDate.errors.required">To Date is required</div>
                 <div *ngIf="f.toDate.errors.compareDate">To Date is must great than From Date</div>
             </div>
         </div>
+
+        <br>
+
+        <div class="form-group">
+            <input type="text" class="form-control w-50" formControlName="fromDate"
+                onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
+        </div>
+
         <button class="btn btn-primary">Submit</button>
         <pre>{{ heroForm.value | json }}</pre>
 

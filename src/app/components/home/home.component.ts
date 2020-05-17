@@ -8,7 +8,7 @@ import { AppState } from '../../app.state';
 import * as TutorialActions from '../../actions/tutorial.action';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/validators/must-match.validator';
-import { CompareDate } from 'src/app/validators/compare-date.validator';
+import { CompareDate, CompareTwoDate } from 'src/app/validators/compare-date.validator';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -90,7 +90,10 @@ export class HomeComponent implements OnInit {
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
     }, {
-      validator: [MustMatch('name', 'name2'), CompareDate('fromDate', 'toDate')]
+      validator: [MustMatch('name', 'name2'), 
+                  CompareTwoDate('fromDate', 'toDate')
+                  // CompareDate('fromDate', 'toDate')
+    ]
     });
 
     this.loadTimeCode();
@@ -98,6 +101,15 @@ export class HomeComponent implements OnInit {
     const transTypeChanges = this.heroForm.get('transType').valueChanges;
     const processCodesChanges = this.heroForm.get('processCodes').valueChanges;
     const serviceCodesChanges = this.heroForm.get('serviceCodes').valueChanges;
+
+    const fromDateChanges = this.heroForm.get('fromDate').valueChanges;
+    const toDateChanges = this.heroForm.get('toDate').valueChanges;
+    fromDateChanges.subscribe(value => {
+      localStorage.setItem('lastChange','1');
+    });
+    toDateChanges.subscribe(value => {
+      localStorage.setItem('lastChange','2');
+    });
 
     transTypeChanges.subscribe(value => {
       this.heroForm.get('name').patchValue(value);
@@ -112,7 +124,7 @@ export class HomeComponent implements OnInit {
       this.isCheckedProduct = false;
       setTimeout(() => {
         this.getAge1(value);
-        this.isChecked = (this.ageData.length > 0 && this.ageData.length === this.f.processCodes.value.length) ? true : false;        
+        this.isChecked = (this.ageData.length > 0 && this.ageData.length === this.f.processCodes.value.length) ? true : false;
       }, this.timeOut);
     });
 
@@ -275,5 +287,4 @@ export class HomeComponent implements OnInit {
   delTutorial(index) {
     this.store.dispatch(new TutorialActions.RemoveTutorial(index))
   }
-
 }
